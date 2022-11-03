@@ -12,9 +12,15 @@ class ReferralTrackerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Referral Tracker App",
+      theme: ThemeData(
+        appBarTheme: trackerAppBarTheme,
+      ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("Referral Tracker"),
+          title: const Text(
+            "Referral Tracker",
+            style: trackerAppBarTextStyle,
+          ),
         ),
         body: const Text("this is app content"),
       ),
