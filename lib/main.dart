@@ -56,11 +56,13 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
-                ClipRect(
+                const SizedBox(height: 30),
+                SizedBox(
+                  width: double.infinity,
                   child: OutlinedButton(
                       style: OutlinedButton.styleFrom(
                         backgroundColor: CustomColours.conestogaBlack,
+                        shape: const BeveledRectangleBorder(),
                       ),
                       onPressed: () {
                         Navigator.pushNamed(context, home);
@@ -70,7 +72,7 @@ class WelcomeScreen extends StatelessWidget {
                         style: TextStyle(color: CustomColours.conestogaGold),
                       )),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 20),
                 TextButton(
                     onPressed: () {
                       Navigator.pushNamed(context, home);
