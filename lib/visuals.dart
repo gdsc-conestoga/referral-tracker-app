@@ -64,12 +64,3 @@ const Text trackerTitle = Text(
   "Referral Tracker",
   style: trackerAppBarTextStyle,
 );
-
-Route _createRoute(final Widget newPage) {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => newPage,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      return child;
-    },
-  );
-}
