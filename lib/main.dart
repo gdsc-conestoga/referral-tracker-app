@@ -1,4 +1,3 @@
-import 'package:referral_tracker/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:referral_tracker/screens/dashboard_screen.dart';
 import 'package:referral_tracker/screens/login_screen.dart';
@@ -11,10 +10,10 @@ class ReferralTrackerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/',
+      initialRoute: LogInScreen.id,
       routes: {
-        home: (context) => const LogInScreen(),
-        applicationPageRoute: (context) => const DashboardScreen(),
+        LogInScreen.id: (context) => const LogInScreen(),
+        DashboardScreen.id: (context) => const DashboardScreen(),
       },
     );
   }

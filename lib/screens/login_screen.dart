@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import '../constants.dart';
+import 'package:referral_tracker/screens/dashboard_screen.dart';
 
 class LogInScreen extends StatelessWidget {
+  static String id = '/';
+
   const LogInScreen({Key? key}) : super(key: key);
 
   @override
@@ -49,24 +51,20 @@ class LogInScreen extends StatelessWidget {
                   style: OutlinedButton.styleFrom(
                     shape: const BeveledRectangleBorder(),
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(context, home);
-                  },
+                  onPressed: () {},
                   child: const Text("Log in"),
                 ),
               ),
               const SizedBox(height: 20),
               TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, home);
-                  },
+                  onPressed: () {},
                   child: const Align(
                     alignment: Alignment.centerLeft,
                     child: Text("Forgot password?"),
                   )),
               TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, applicationPageRoute);
+                    Navigator.pushNamed(context, DashboardScreen.id);
                   },
                   child: const Align(
                     alignment: Alignment.centerLeft,
