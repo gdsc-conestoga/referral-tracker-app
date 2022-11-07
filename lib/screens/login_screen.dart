@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:referral_tracker/screens/dashboard_screen.dart';
+import 'package:referral_tracker/screens/store_screen.dart';
+import 'package:referral_tracker/widgets/store_item.dart';
 
 class LogInScreen extends StatelessWidget {
   static String id = '/';
@@ -26,6 +28,15 @@ class LogInScreen extends StatelessWidget {
           width: 200,
           child: Column(
             children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, StoreScreen.id);
+                },
+                child: const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text("Go to Store Screen"),
+                ),
+              ),
               SizedBox(
                 width: 200,
                 child: TextFormField(
@@ -69,7 +80,7 @@ class LogInScreen extends StatelessWidget {
                   child: const Align(
                     alignment: Alignment.centerLeft,
                     child: Text("Apply for membership"),
-                  ))
+                  )),
             ],
           ),
         ),
