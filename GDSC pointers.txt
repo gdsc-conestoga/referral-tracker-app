@@ -2,3 +2,4 @@ comma after every object property and closing bracket
 route inside the class itself
 add route to routes.dart when done
 separate branch for each feature. Branch name: "feature/<feature name>" or "debug/<debug name>", etc.
+don't commit config file
