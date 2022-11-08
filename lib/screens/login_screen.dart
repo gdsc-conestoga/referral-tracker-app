@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:referral_tracker/screens/dashboard_screen.dart';
+import 'package:referral_tracker/screens/membership_application_screen.dart';
 import 'package:referral_tracker/screens/store_screen.dart';
 import 'package:referral_tracker/widgets/store_item.dart';
 
@@ -12,7 +13,9 @@ class LogInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Referral Tracker"),
+        title: const Text(
+          "Referral Tracker",
+        ),
         actions: <Widget>[
           TextButton(
             onPressed: () {
@@ -75,7 +78,8 @@ class LogInScreen extends StatelessWidget {
                   )),
               TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, DashboardScreen.id);
+                    Navigator.pushNamed(
+                        context, MembershipApplicationScreen.id);
                   },
                   child: const Align(
                     alignment: Alignment.centerLeft,
