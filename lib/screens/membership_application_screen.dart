@@ -10,14 +10,18 @@ class MembershipApplicationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Referral Tracker"),
+        title: const Text(
+          "Referral Tracker",
+        ),
         actions: <Widget>[
           TextButton(
             onPressed: () {},
             style: TextButton.styleFrom(
               foregroundColor: Theme.of(context).colorScheme.onPrimary,
             ),
-            child: const Text("Log In"),
+            child: const Text(
+              "Log In",
+            ),
           ),
         ],
       ),
@@ -78,7 +82,9 @@ class MembershipApplicationScreen extends StatelessWidget {
                     shape: const BeveledRectangleBorder(),
                   ),
                   onPressed: () {},
-                  child: const Text("Apply"),
+                  child: const Text(
+                    "Apply",
+                  ),
                 ),
               ),
               const SizedBox(
