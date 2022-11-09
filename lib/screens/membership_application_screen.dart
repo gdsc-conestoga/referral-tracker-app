@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:referral_tracker/widgets/store_item.dart';
 
 class MembershipApplicationScreen extends StatelessWidget {
-  static String id = '/membership_application';
+  static const String id = '/membership_application';
   static const double _columnWidth = 200;
 
   const MembershipApplicationScreen({Key? key}) : super(key: key);
@@ -11,16 +10,14 @@ class MembershipApplicationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Referral Tracker",
-        ),
+        title: const Text("Referral Tracker"),
       ),
       body: Center(
         child: SizedBox(
           child: Column(
             children: [
               const SizedBox(
-                height: 30,
+                height: 100,
               ),
               const SizedBox(
                 width: _columnWidth,
@@ -72,16 +69,14 @@ class MembershipApplicationScreen extends StatelessWidget {
                     shape: const BeveledRectangleBorder(),
                   ),
                   onPressed: () {},
-                  child: const Text(
-                    "Apply",
-                  ),
+                  child: const Text("Apply"),
                 ),
               ),
               const SizedBox(
                 height: 20,
               ),
               const Text(
-                "Please note: Only current Conestoga students can apply for a membership",
+                "Please note: Only current Conestoga students can apply for a membership.",
                 style: TextStyle(
                   fontSize: 10,
                 ),

@@ -5,7 +5,7 @@ import 'package:referral_tracker/screens/store_screen.dart';
 import 'package:referral_tracker/widgets/store_item.dart';
 
 class LogInScreen extends StatelessWidget {
-  static String id = '/';
+  static const String id = '/';
 
   const LogInScreen({Key? key}) : super(key: key);
 
@@ -44,18 +44,22 @@ class LogInScreen extends StatelessWidget {
                 width: 200,
                 child: TextFormField(
                   decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: "Student number",
-                  ),
+                      border: UnderlineInputBorder(),
+                      labelText: "Student number",
+                      labelStyle: TextStyle(
+                        fontSize: 10,
+                      )),
                 ),
               ),
               SizedBox(
                 width: 200,
                 child: TextFormField(
                   decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: "Password",
-                  ),
+                      border: UnderlineInputBorder(),
+                      labelText: "Password",
+                      labelStyle: TextStyle(
+                        fontSize: 10,
+                      )),
                 ),
               ),
               const SizedBox(height: 30),
