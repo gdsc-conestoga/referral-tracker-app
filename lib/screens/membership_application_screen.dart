@@ -11,6 +11,15 @@ class MembershipApplicationScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Referral Tracker"),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {},
+            style: TextButton.styleFrom(
+              foregroundColor: Theme.of(context).colorScheme.onPrimary,
+            ),
+            child: const Text("Log In"),
+          ),
+        ],
       ),
       body: Center(
         child: SizedBox(
