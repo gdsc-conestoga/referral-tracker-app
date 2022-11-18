@@ -15,6 +15,8 @@ migrate_working_dir/
 *.ipr
 *.iws
 .idea/
+*.png
+*.txt
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
@@ -34,6 +36,7 @@ migrate_working_dir/
 
 # Web related
 lib/generated_plugin_registrant.dart
+lib/firebase_options.dart
 
 # Symbolication related
 app.*.symbols

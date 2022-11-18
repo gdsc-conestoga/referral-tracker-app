@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:referral_tracker/screens/dashboard_screen.dart';
+import 'package:referral_tracker/screens/membership_application_screen.dart';
 import 'package:referral_tracker/screens/store_screen.dart';
 import 'package:referral_tracker/widgets/store_item.dart';
 
 class LogInScreen extends StatelessWidget {
-  static String id = '/';
+  static const String id = '/';
 
   const LogInScreen({Key? key}) : super(key: key);
 
@@ -12,29 +13,40 @@ class LogInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Referral Tracker"),
+        title: const Text(
+          "Referral Tracker",
+        ),
         actions: <Widget>[
           TextButton(
             onPressed: () {
               debugPrint("Login button pressed");
             },
-            child: const Text("Log In"),
+            child: const Text(
+              "Log In",
+            ),
           ),
         ],
       ),
       body: Center(
         child: Container(
-          margin: const EdgeInsets.only(top: 100),
+          margin: const EdgeInsets.only(
+            top: 100,
+          ),
           width: 200,
           child: Column(
             children: [
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, StoreScreen.id);
+                  Navigator.pushNamed(
+                    context,
+                    StoreScreen.id,
+                  );
                 },
                 child: const Align(
                   alignment: Alignment.centerLeft,
-                  child: Text("Go to Store Screen"),
+                  child: Text(
+                    "Go to Store Screen",
+                  ),
                 ),
               ),
               SizedBox(
@@ -43,6 +55,9 @@ class LogInScreen extends StatelessWidget {
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: "Student number",
+                    labelStyle: TextStyle(
+                      fontSize: 10,
+                    ),
                   ),
                 ),
               ),
@@ -52,6 +67,9 @@ class LogInScreen extends StatelessWidget {
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: "Password",
+                    labelStyle: TextStyle(
+                      fontSize: 10,
+                    ),
                   ),
                 ),
               ),
@@ -63,24 +81,37 @@ class LogInScreen extends StatelessWidget {
                     shape: const BeveledRectangleBorder(),
                   ),
                   onPressed: () {},
-                  child: const Text("Log in"),
+                  child: const Text(
+                    "Log in",
+                  ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(
+                height: 20,
+              ),
               TextButton(
-                  onPressed: () {},
-                  child: const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text("Forgot password?"),
-                  )),
+                onPressed: () {},
+                child: const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Forgot password?",
+                  ),
+                ),
+              ),
               TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, DashboardScreen.id);
-                  },
-                  child: const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text("Apply for membership"),
-                  )),
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    MembershipApplicationScreen.id,
+                  );
+                },
+                child: const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Apply for membership",
+                  ),
+                ),
+              ),
             ],
           ),
         ),
