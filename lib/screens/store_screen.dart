@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:referral_tracker/widgets/store_item.dart';
 
 class StoreScreen extends StatelessWidget {
-  static String id = '/store';
+  static const String id = '/store';
 
   const StoreScreen({Key? key}) : super(key: key);
 
