@@ -80,7 +80,12 @@ class LogInScreen extends StatelessWidget {
                   style: OutlinedButton.styleFrom(
                     shape: const BeveledRectangleBorder(),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      DashboardScreen.id,
+                    );
+                  },
                   child: const Text(
                     "Log in",
                   ),
