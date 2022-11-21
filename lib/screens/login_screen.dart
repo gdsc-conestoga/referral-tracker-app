@@ -16,16 +16,6 @@ class LogInScreen extends StatelessWidget {
         title: const Text(
           "Referral Tracker",
         ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              debugPrint("Login button pressed");
-            },
-            child: const Text(
-              "Log In",
-            ),
-          ),
-        ],
       ),
       body: Center(
         child: Container(
@@ -51,7 +41,7 @@ class LogInScreen extends StatelessWidget {
                         ),
                         Image(
                             width: 25,
-                            image: AssetImage('assets/google-logo.png')),
+                            image: AssetImage('images/google-logo.png')),
                       ],
                     )),
               ),
