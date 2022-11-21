@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:referral_tracker/screens/dashboard_screen.dart';
 import 'package:referral_tracker/screens/membership_application_screen.dart';
 import 'package:referral_tracker/screens/store_screen.dart';
+import 'package:referral_tracker/utils/authentication.dart';
 import 'package:referral_tracker/widgets/store_item.dart';
 
 class LogInScreen extends StatelessWidget {
@@ -31,7 +33,21 @@ class LogInScreen extends StatelessWidget {
                             MaterialStateProperty.all(Colors.black),
                         backgroundColor:
                             MaterialStateProperty.all(Colors.grey[300])),
-                    onPressed: () {},
+                    onPressed: () async {
+                      User? user = await Authentication.signInWithGoogle(
+                          context: context);
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.black,
+                          content: Text(
+                            user?.displayName ?? "no user name",
+                            style: TextStyle(
+                                color: Colors.redAccent, letterSpacing: 0.5),
+                          ),
+                        ),
+                      );
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
