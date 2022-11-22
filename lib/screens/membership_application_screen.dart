@@ -17,7 +17,7 @@ class MembershipApplicationScreen extends StatelessWidget {
           TextButton(
             onPressed: () {},
             style: TextButton.styleFrom(
-              foregroundColor: Theme.of(context).colorScheme.onPrimary,
+              backgroundColor: Theme.of(context).colorScheme.onPrimary,
             ),
             child: const Text(
               "Log In",
