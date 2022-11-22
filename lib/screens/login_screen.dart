@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:referral_tracker/screens/dashboard_screen.dart';
 import 'package:referral_tracker/screens/membership_application_screen.dart';
 import 'package:referral_tracker/screens/store_screen.dart';
+import 'package:referral_tracker/utils/authentication.dart';
 import 'package:referral_tracker/widgets/store_item.dart';
 
 class LogInScreen extends StatelessWidget {
@@ -16,107 +18,71 @@ class LogInScreen extends StatelessWidget {
         title: const Text(
           "Referral Tracker",
         ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              debugPrint("Login button pressed");
-            },
-            child: const Text(
-              "Log In",
-            ),
-          ),
-        ],
       ),
       body: Center(
         child: Container(
-          margin: const EdgeInsets.only(
-            top: 100,
-          ),
+          margin: const EdgeInsets.only(top: 200),
           width: 200,
           child: Column(
             children: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    StoreScreen.id,
-                  );
-                },
-                child: const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Go to Store Screen",
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 200,
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: "Student number",
-                    labelStyle: TextStyle(
-                      fontSize: 10,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 200,
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: "Password",
-                    labelStyle: TextStyle(
-                      fontSize: 10,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
               SizedBox(
                 width: double.infinity,
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    shape: const BeveledRectangleBorder(),
+                child: TextButton(
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.black),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.grey[300])),
+                    onPressed: () async {
+                      User? user = await Authentication.signInWithGoogle(
+                          context: context);
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.black,
+                          content: Text(
+                            user?.displayName ?? "no user name",
+                            style: TextStyle(
+                                color: Colors.redAccent, letterSpacing: 0.5),
+                          ),
+                        ),
+                      );
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          "Log in with ",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Image(
+                            width: 25,
+                            image: AssetImage('images/google-logo.png')),
+                      ],
+                    )),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: TextButton(
+                  style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(Colors.black),
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.grey[300]),
                   ),
                   onPressed: () {
                     Navigator.pushNamed(
                       context,
-                      DashboardScreen.id,
+                      MembershipApplicationScreen.id,
                     );
                   },
                   child: const Text(
-                    "Log in",
+                    "Apply for Membership",
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextButton(
-                onPressed: () {},
-                child: const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Forgot password?",
-                  ),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    MembershipApplicationScreen.id,
-                  );
-                },
-                child: const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Apply for membership",
-                  ),
-                ),
-              ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
