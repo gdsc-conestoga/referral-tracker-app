@@ -76,11 +76,16 @@ class LogInScreen extends StatelessWidget {
                     backgroundColor:
                         MaterialStateProperty.all(Colors.grey[300]),
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(
-                      context,
-                      MembershipApplicationScreen.id,
-                    );
+                  onPressed: () async {
+                    User? user =
+                        await Authentication.signInWithGoogle(context: context);
+
+                    if (user != null) {
+                      Navigator.pushNamed(
+                        context,
+                        MembershipApplicationScreen.id,
+                      );
+                    }
                   },
                   child: const Text(
                     "Apply for Membership",
