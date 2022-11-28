@@ -3,6 +3,7 @@ import 'package:referral_tracker/widgets/store_item.dart';
 
 class StoreScreen extends StatelessWidget {
   static const String id = '/store';
+  static const String nameOnAppBar = "Store";
 
   const StoreScreen({Key? key}) : super(key: key);
 

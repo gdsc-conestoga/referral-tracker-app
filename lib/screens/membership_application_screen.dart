@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:referral_tracker/widgets/pageTitle.dart';
 
 class MembershipApplicationScreen extends StatelessWidget {
   static const String id = '/membership_application';
-  static const double _columnWidth = 200;
+  static const String _nameOnTitle = "Membership Application";
+  static const double _columnWidth = 220;
 
   const MembershipApplicationScreen({Key? key}) : super(key: key);
 
@@ -32,17 +34,11 @@ class MembershipApplicationScreen extends StatelessWidget {
               const SizedBox(
                 height: 100,
               ),
-              const SizedBox(
+              SizedBox(
                 width: _columnWidth,
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Membership Application",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
+                  child: pageTitle(_nameOnTitle),
                 ),
               ),
               const SizedBox(
