@@ -37,12 +37,18 @@ class LogInScreen extends StatelessWidget {
                       User? user = await Authentication.signInWithGoogle(
                           context: context);
 
+                      if (user != null) {
+                        Navigator.pushNamed(
+                          context,
+                          DashboardScreen.id,
+                        );
+                      }
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           backgroundColor: Colors.black,
                           content: Text(
                             user?.displayName ?? "no user name",
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.redAccent, letterSpacing: 0.5),
                           ),
                         ),
@@ -70,11 +76,16 @@ class LogInScreen extends StatelessWidget {
                     backgroundColor:
                         MaterialStateProperty.all(Colors.grey[300]),
                   ),
-                  onPressed: () {
-                    Navigator.pushNamed(
-                      context,
-                      MembershipApplicationScreen.id,
-                    );
+                  onPressed: () async {
+                    User? user =
+                        await Authentication.signInWithGoogle(context: context);
+
+                    if (user != null) {
+                      Navigator.pushNamed(
+                        context,
+                        MembershipApplicationScreen.id,
+                      );
+                    }
                   },
                   child: const Text(
                     "Apply for Membership",
