@@ -110,7 +110,6 @@ class _MembershipApplicationScreenState
 
                     final bool? applicantExists =
                         await DatabaseService().hasUser(studentNumber);
-                    debugPrint("applicant exists: $applicantExists");
 
                     if (applicantExists == null) {
                       debugPrint("Error looking up applicant in database.");
@@ -131,7 +130,7 @@ class _MembershipApplicationScreenState
                           username: username,
                           email: email,
                           studentNumber: studentNumber);
-                      debugPrint("status: $status");
+                      debugPrint("User successfully added: $status");
                     } else {
                       debugPrint("Missing email and/or username.");
                       return;
