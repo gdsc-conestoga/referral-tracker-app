@@ -139,22 +139,21 @@ class _MembershipApplicationScreenState
                     if (referrerStudentNumber == "") {
                       debugPrint(
                           "No referrer/Applicant did not name referrer.");
-                      return;
-                    }
-
-                    final bool? referrerExists =
-                        await DatabaseService().hasUser(referrerStudentNumber);
-
-                    if (referrerExists == null) {
-                      debugPrint("Error looking up referrer");
-                    } else if (!referrerExists) {
-                      debugPrint(
-                          "Referrer does not exist/no longer exists in database.");
                     } else {
-                      final bool bonusIsApplied = await DatabaseService()
-                          .addReferralBonus(
-                              referrerStudentNumber, _referralBonus);
-                      debugPrint("bonus applied: $bonusIsApplied");
+                      final bool? referrerExists = await DatabaseService()
+                          .hasUser(referrerStudentNumber);
+
+                      if (referrerExists == null) {
+                        debugPrint("Error looking up referrer");
+                      } else if (!referrerExists) {
+                        debugPrint(
+                            "Referrer does not exist/no longer exists in database.");
+                      } else {
+                        final bool bonusIsApplied = await DatabaseService()
+                            .addReferralBonus(
+                                referrerStudentNumber, _referralBonus);
+                        debugPrint("bonus applied: $bonusIsApplied");
+                      }
                     }
 
                     Navigator.pushNamed(context, DashboardScreen.id);
