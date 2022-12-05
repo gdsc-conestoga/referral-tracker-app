@@ -136,6 +136,12 @@ class _MembershipApplicationScreenState
                       return;
                     }
 
+                    if (referrerStudentNumber == "") {
+                      debugPrint(
+                          "No referrer/Applicant did not name referrer.");
+                      return;
+                    }
+
                     final bool? referrerExists =
                         await DatabaseService().hasUser(referrerStudentNumber);
 
