@@ -1,17 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
-  Future<DocumentSnapshot?> _userLookup(String studentNumber) async {
+  Future<DocumentSnapshot> documentLookupByUuid(String uuid) async {
     final CollectionReference users =
         FirebaseFirestore.instance.collection('users');
-    final QuerySnapshot query = await users
-        .where('student_number', isEqualTo: studentNumber)
-        .limit(1)
-        .get();
-    return query.size > 0 ? query.docs[0] : null;
+    return await users.doc(uuid).get();
   }
 
-  Future<bool> addUser({
+  Future<bool> addUser(
+    String uuid, {
     required String username,
     required String email,
     required String studentNumber,
@@ -23,7 +20,8 @@ class DatabaseService {
           FirebaseFirestore.instance.collection('users');
 
       userIsAdded = await users
-          .add({
+          .doc(uuid)
+          .set({
             'username': username,
             'email': email,
             'student_number': studentNumber,
@@ -38,11 +36,12 @@ class DatabaseService {
     return userIsAdded;
   }
 
-  Future<bool> removeUser(String studentNumber) async {
+  Future<bool> removeUser(String uuid) async {
     bool userIsRemoved = true;
+
     try {
-      final DocumentSnapshot? userDocument = await _userLookup(studentNumber);
-      userIsRemoved = (userDocument == null)
+      final DocumentSnapshot userDocument = await documentLookupByUuid(uuid);
+      userIsRemoved = userDocument.exists
           ? false
           : await userDocument.reference
               .delete()
@@ -55,23 +54,18 @@ class DatabaseService {
     return userIsRemoved;
   }
 
-  Future<bool?> hasUser(String studentNumber) async {
-    bool? userExists = true;
-    try {
-      userExists = (await _userLookup(studentNumber) != null);
-    } catch (e) {
-      userExists = null;
-    }
-    return userExists;
+  Future<bool> hasUser(String uuid) async {
+    final DocumentSnapshot document = await documentLookupByUuid(uuid);
+    return document.exists;
   }
 
-  Future<bool> addReferralBonus(String referrerStudentNumber, int bonus) async {
+  Future<bool> addReferralBonus(String referrerStudentID, int bonus) async {
     bool bonusIsAdded = true;
     try {
-      final DocumentSnapshot? referrerDocument =
-          await _userLookup(referrerStudentNumber);
+      final DocumentSnapshot referrerDocument =
+          await documentLookupByUuid(referrerStudentID);
 
-      if (referrerDocument == null) {
+      if (!referrerDocument.exists) {
         bonusIsAdded = false;
       } else {
         final int currCoinCount = referrerDocument.get('total_coins');

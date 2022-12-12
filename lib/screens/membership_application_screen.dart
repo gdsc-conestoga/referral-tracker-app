@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:referral_tracker/main.dart';
 import 'package:referral_tracker/screens/dashboard_screen.dart';
 import 'package:referral_tracker/utils/database_service.dart';
-import 'package:referral_tracker/widgets/pageTitle.dart';
+import 'package:referral_tracker/widgets/page_title.dart';
+import 'package:uuid/uuid.dart';
+import 'package:validation_chain/validation_chain.dart';
+import 'package:referral_tracker/utils/sanitize_string.dart';
 
 class MembershipApplicationScreen extends StatefulWidget {
   static const String id = '/membership_application';
@@ -21,9 +23,10 @@ class MembershipApplicationScreen extends StatefulWidget {
 class _MembershipApplicationScreenState
     extends State<MembershipApplicationScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String studentNumber = "";
-  String referrerStudentNumber = "";
+  String referrerStudentID = "";
   static const int _referralBonus = 5;
 
   @override
@@ -64,17 +67,29 @@ class _MembershipApplicationScreenState
               ),
               SizedBox(
                 width: MembershipApplicationScreen._columnWidth,
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: "Student number",
-                    labelStyle: TextStyle(
-                      fontSize: 10,
+                child: Form(
+                  key: _formKey,
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      border: UnderlineInputBorder(),
+                      labelText: "Student number",
+                      labelStyle: TextStyle(
+                        fontSize: 10,
+                      ),
                     ),
+                    onChanged: (value) {
+                      if (_formKey.currentState!.validate()) {
+                        studentNumber = const SanitizationChain(
+                              [trim],
+                            ).sanitize(value) ??
+                            "";
+                      }
+                    },
+                    validator: const ValidationChain([
+                      isNumeric,
+                      correctLength,
+                    ]).validate,
                   ),
-                  onChanged: (value) {
-                    studentNumber = value;
-                  },
                 ),
               ),
               SizedBox(
@@ -82,13 +97,16 @@ class _MembershipApplicationScreenState
                 child: TextFormField(
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
-                    labelText: "🟡 Referrer student number (optional)",
+                    labelText: "🟡 Referrer ID (optional)",
                     labelStyle: TextStyle(
                       fontSize: 10,
                     ),
                   ),
                   onChanged: (value) {
-                    referrerStudentNumber = value;
+                    referrerStudentID = const SanitizationChain(
+                          [trim],
+                        ).sanitize(value) ??
+                        "";
                   },
                 ),
               ),
@@ -102,19 +120,22 @@ class _MembershipApplicationScreenState
                     shape: const BeveledRectangleBorder(),
                   ),
                   onPressed: () async {
-                    if (studentNumber == referrerStudentNumber) {
-                      debugPrint(
-                          "Applicant and referrer cannot be the same person.");
+                    if (studentNumber == "") {
+                      debugPrint("No valid student number");
                       return;
                     }
 
-                    final bool? applicantExists =
-                        await DatabaseService().hasUser(studentNumber);
+                    debugPrint("student number: $studentNumber");
+                    final String uuid =
+                        const Uuid().v5(Uuid.NAMESPACE_URL, studentNumber);
 
-                    if (applicantExists == null) {
-                      debugPrint("Error looking up applicant in database.");
-                      return;
-                    }
+                    debugPrint("uuid: $uuid");
+                    final database = DatabaseService();
+
+                    final DocumentSnapshot document =
+                        await database.documentLookupByUuid(uuid);
+                    debugPrint("document: $document");
+                    final bool applicantExists = await database.hasUser(uuid);
 
                     if (applicantExists) {
                       debugPrint("Applicant has already been registered.");
@@ -126,7 +147,7 @@ class _MembershipApplicationScreenState
                     debugPrint("email: $email, name: $username");
 
                     if (email != null && username != null) {
-                      final bool status = await DatabaseService().addUser(
+                      final bool status = await database.addUser(uuid,
                           username: username,
                           email: email,
                           studentNumber: studentNumber);
@@ -136,22 +157,20 @@ class _MembershipApplicationScreenState
                       return;
                     }
 
-                    if (referrerStudentNumber == "") {
+                    if (referrerStudentID == "") {
                       debugPrint(
                           "No referrer/Applicant did not name referrer.");
                     } else {
-                      final bool? referrerExists = await DatabaseService()
-                          .hasUser(referrerStudentNumber);
+                      debugPrint("referer ID: $referrerStudentID");
 
-                      if (referrerExists == null) {
-                        debugPrint("Error looking up referrer");
-                      } else if (!referrerExists) {
-                        debugPrint(
-                            "Referrer does not exist/no longer exists in database.");
+                      final bool referrerExists =
+                          await database.hasUser(referrerStudentID);
+                      if (!referrerExists) {
+                        debugPrint("Cannot find referrer in database.");
                       } else {
-                        final bool bonusIsApplied = await DatabaseService()
-                            .addReferralBonus(
-                                referrerStudentNumber, _referralBonus);
+                        final bool bonusIsApplied =
+                            await database.addReferralBonus(
+                                referrerStudentID, _referralBonus);
                         debugPrint("bonus applied: $bonusIsApplied");
                       }
                     }
