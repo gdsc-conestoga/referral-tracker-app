@@ -86,6 +86,7 @@ class _MembershipApplicationScreenState
                       }
                     },
                     validator: const ValidationChain([
+                      isRequired,
                       isNumeric,
                       correctLength,
                     ]).validate,
