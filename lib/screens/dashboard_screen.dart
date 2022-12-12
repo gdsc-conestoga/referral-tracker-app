@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:referral_tracker/screens/store_screen.dart';
-import 'package:referral_tracker/widgets/appBarButtons.dart';
-import 'package:referral_tracker/widgets/appName.dart';
+import 'package:referral_tracker/widgets/app_bar_buttons.dart';
+import 'package:referral_tracker/widgets/app_name.dart';
 import 'package:referral_tracker/widgets/leaderboard.dart';
 import 'package:referral_tracker/widgets/log_out_button.dart';
-import 'package:referral_tracker/widgets/pageTitle.dart';
+import 'package:referral_tracker/widgets/page_title.dart';
 
 class DashboardScreen extends StatelessWidget {
   static const String id = '/dashboard';
