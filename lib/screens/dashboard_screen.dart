@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:referral_tracker/screens/store_screen.dart';
+import 'package:referral_tracker/screens/rewards_screen.dart';
 import 'package:referral_tracker/widgets/appBarButtons.dart';
 import 'package:referral_tracker/widgets/appName.dart';
 import 'package:referral_tracker/widgets/leaderboard.dart';
@@ -33,6 +34,11 @@ class DashboardScreen extends StatelessWidget {
               width: 40,
             ),
             appBarPageButton(context, StoreScreen.nameOnAppBar, StoreScreen.id),
+            const SizedBox(
+              width: 40,
+            ),
+            appBarPageButton(
+                context, RewardsScreen.nameOnAppBar, RewardsScreen.id),
           ],
         ),
         actions: <Widget>[
