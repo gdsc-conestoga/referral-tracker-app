@@ -135,7 +135,6 @@ class _MembershipApplicationScreenState
 
                     final DocumentSnapshot document =
                         await database.documentLookupByUuid(uuid);
-                    debugPrint("document: $document");
                     final bool applicantExists = await database.hasUser(uuid);
 
                     if (applicantExists) {
@@ -148,11 +147,18 @@ class _MembershipApplicationScreenState
                     debugPrint("email: $email, name: $username");
 
                     if (email != null && username != null) {
-                      final bool status = await database.addUser(uuid,
-                          username: username,
-                          email: email,
-                          studentNumber: studentNumber);
-                      debugPrint("User successfully added: $status");
+                      final bool emailExists =
+                          await database.documentLookupByEmail(email) != null;
+                      if (emailExists) {
+                        debugPrint("Email already exists.");
+                        return;
+                      } else {
+                        final bool status = await database.addUser(uuid,
+                            username: username,
+                            email: email,
+                            studentNumber: studentNumber);
+                        debugPrint("User successfully added: $status");
+                      }
                     } else {
                       debugPrint("Missing email and/or username.");
                       return;

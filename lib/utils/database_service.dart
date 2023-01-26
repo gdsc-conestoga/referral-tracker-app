@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
@@ -57,6 +59,13 @@ class DatabaseService {
   Future<bool> hasUser(String uuid) async {
     final DocumentSnapshot document = await documentLookupByUuid(uuid);
     return document.exists;
+  }
+
+  Future<DocumentSnapshot?> documentLookupByEmail(String email) async {
+    final CollectionReference users =
+        FirebaseFirestore.instance.collection('users');
+    final query = users.where('email', isEqualTo: email).limit(1);
+    return await query.get().then((querySnapShot) => querySnapShot.docs[0]);
   }
 
   Future<bool> addReferralBonus(String referrerStudentID, int bonus) async {
