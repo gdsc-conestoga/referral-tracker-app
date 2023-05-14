@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:referral_tracker/routes.dart';
+import 'package:referral_tracker/screens/dashboard_screen.dart';
 import 'package:referral_tracker/screens/login_screen.dart';
 
 import 'firebase_options.dart';
@@ -19,7 +20,7 @@ class ReferralTrackerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: LogInScreen.id,
+      initialRoute: DashboardScreen.id,
       routes: routes,
     );
   }
