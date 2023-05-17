@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:referral_tracker/screens/store_screen.dart';
-import 'package:referral_tracker/widgets/appBarButtons.dart';
-import 'package:referral_tracker/widgets/appName.dart';
 import 'package:referral_tracker/widgets/custom_table.dart';
-import 'package:referral_tracker/widgets/log_out_button.dart';
 
 class DashboardScreen extends StatelessWidget {
   static const String id = '/dashboard';
@@ -15,40 +11,35 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: <Widget>[
-            appName,
-            const SizedBox(
-              width: 50,
-            ),
-            const Text(
-              nameOnAppBar,
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-            const SizedBox(
-              width: 40,
-            ),
-            appBarPageButton(context, StoreScreen.nameOnAppBar, StoreScreen.id),
-          ],
+        automaticallyImplyLeading: false,
+        title: const Align(
+          alignment: Alignment.centerLeft,
+          child: Text('Referral Tracker'),
         ),
-        actions: <Widget>[
+        actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: ()=>{},
             child: const Text(
-              "69,420,000 🪙",
-              style: TextStyle(
-                color: Colors.white,
-              ),
+              'Dashboard',
+              style: TextStyle(color: Colors.white),
             ),
           ),
-          const LogOutButton(),
+          IconButton(
+            icon: const Icon(Icons.logout_outlined),
+            tooltip: 'Log Out',
+            onPressed: () {
+              // handle the press
+            },
+          ),
         ],
       ),
       body: const Center(
-        child: Column(children: [Center(child: Text('Top Member Scores')),CustomTable(),],)
-      ),
+          child: Column(
+        children: [
+          Center(child: Text('Top Member Scores')),
+          CustomTable(),
+        ],
+      )),
     );
   }
 }
