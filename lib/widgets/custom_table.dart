@@ -15,8 +15,18 @@ class _CustomTableState extends State<CustomTable> {
     for (var element in users) {
       tableRows.add(TableRow(
         children: [
-          TableCell(child: Text(element['username'].toString())),
-          TableCell(child: Text(element['total_coins'].toString())),
+          TableCell(
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(element['username'].toString()),
+            ),
+          ),
+          TableCell(
+            child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(element['total_coins'].toString()),
+            ),
+          ),
         ],
       ));
     }
@@ -26,15 +36,18 @@ class _CustomTableState extends State<CustomTable> {
 
   @override
   Widget build(BuildContext context) {
-    return Table(
-      border: TableBorder.symmetric(
-        inside: const BorderSide(
-          color: Colors.black,
-          style: BorderStyle.solid,
-          width: 1.0,
+    return SizedBox(
+      width: 500,
+      child: Table(
+        border: TableBorder.symmetric(
+          inside: const BorderSide(
+            color: Colors.black,
+            style: BorderStyle.solid,
+            width: 1.0,
+          ),
         ),
+        children: generateRows(),
       ),
-      children: generateRows(),
     );
   }
 }

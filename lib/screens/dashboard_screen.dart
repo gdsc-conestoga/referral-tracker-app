@@ -3,14 +3,11 @@ import 'package:referral_tracker/screens/store_screen.dart';
 import 'package:referral_tracker/widgets/appBarButtons.dart';
 import 'package:referral_tracker/widgets/appName.dart';
 import 'package:referral_tracker/widgets/custom_table.dart';
-import 'package:referral_tracker/widgets/leaderboard.dart';
 import 'package:referral_tracker/widgets/log_out_button.dart';
-import 'package:referral_tracker/widgets/pageTitle.dart';
 
 class DashboardScreen extends StatelessWidget {
   static const String id = '/dashboard';
   static const String nameOnAppBar = "Dashboard";
-  static const String _nameOnTitle = "Top Member Scores";
 
   const DashboardScreen({Key? key}) : super(key: key);
 
@@ -50,7 +47,7 @@ class DashboardScreen extends StatelessWidget {
         ],
       ),
       body: const Center(
-        child: CustomTable(),
+        child: Column(children: [Center(child: Text('Top Member Scores')),CustomTable(),],)
       ),
     );
   }
