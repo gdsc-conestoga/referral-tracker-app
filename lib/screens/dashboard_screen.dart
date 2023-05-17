@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:referral_tracker/widgets/custom_table.dart';
+import 'package:referral_tracker/widgets/menu_option.dart';
 
 class DashboardScreen extends StatelessWidget {
   static const String id = '/dashboard';
@@ -17,13 +18,8 @@ class DashboardScreen extends StatelessWidget {
           child: Text('Referral Tracker'),
         ),
         actions: [
-          TextButton(
-            onPressed: ()=>{},
-            child: const Text(
-              'Dashboard',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
+          MenuOption(text: 'Dashboard', isBold: true),
+          MenuOption(text: 'Store', isBold: false),
           IconButton(
             icon: const Icon(Icons.logout_outlined),
             tooltip: 'Log Out',
